@@ -45,7 +45,7 @@
       </span>
     </h1>
     <p class="header-promo">
-      Zenith is a hackathon in San Francisco for teens led by the Hack Club community coming next year. Join us and make
+      Zenith is a hackathon in the UK for teens led by the Hack Club community coming next year. Join us and make
       something awesome!
     </p>
     <form
