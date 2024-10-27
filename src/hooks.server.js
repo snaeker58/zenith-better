@@ -7,10 +7,7 @@ export async function handle({ event, resolve }) {
   // Disable JS preloading. This took hours to find.
   // I hate web development.
   // Also, use the link header to preload our fonts because they're the biggest things on the site.
-  response.headers.set(
-    'link',
-    `<${SpaceGroteskTitle}>; rel"preconnect", <${InstrumentSansASCII}>; rel="preconnect"`
-  );
+  response.headers.set('link', `<${SpaceGroteskTitle}>; rel"preconnect", <${InstrumentSansASCII}>; rel="preconnect"`);
 
   return response;
 }

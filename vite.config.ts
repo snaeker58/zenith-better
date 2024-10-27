@@ -10,6 +10,6 @@ export default defineConfig({
     modulePreload: false
   },
   css: {
-    transformer: "lightningcss"
+    transformer: 'lightningcss'
   }
 });

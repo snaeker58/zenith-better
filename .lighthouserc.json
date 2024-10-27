@@ -1,9 +1,7 @@
 {
   "ci": {
     "collect": {
-      "url": [
-        "http://localhost:8080/"
-      ],
+      "url": ["http://localhost:8080/"],
       "startServerCommand": "bun run preview -- --port=8080"
     },
     "upload": {

@@ -19,7 +19,7 @@
   import Mos from '$lib/logos/mos_logo_3.png';
   import { enhance } from '$app/forms';
 
-  let button: HTMLButtonElement = $state();
+  let button: HTMLButtonElement | undefined = $state();
 </script>
 
 <svelte:head>
@@ -34,13 +34,13 @@
   <div class="zenith-header">
     <h1>
       <span class="no-break">
-        {#each Array.from("Zenith").entries() as [idx, char]}
+        {#each Array.from('Zenith').entries() as [idx, char]}
           <span style="--idx: {idx}" class="header-element">{char}</span>
         {/each}
       </span>
       <span class="no-break">
-        {#each  Array.from("2025").entries() as [idx, char]}
-          <span style="--idx: {idx+7}" class="header-element date">{char}</span>
+        {#each Array.from('2025').entries() as [idx, char]}
+          <span style="--idx: {idx + 7}" class="header-element date">{char}</span>
         {/each}
       </span>
     </h1>
@@ -52,14 +52,14 @@
       class="outer-email-form"
       method="POST"
       action="/?/email"
-      use:enhance={({ _ }) => {
-        button.classList.add('loading');
-        button.setAttribute('disabled', '');
+      use:enhance={() => {
+        button?.classList.add('loading');
+        button?.setAttribute('disabled', '');
         return async ({ update }) => {
           await update();
 
-          button.classList.remove('loading');
-          button.classList.add('loaded');
+          button?.classList.remove('loading');
+          button?.classList.add('loaded');
         };
       }}
     >
@@ -87,8 +87,9 @@
         </button>
       </div>
       <p class="legal">
-        We collect your IP address and approximate location.
-        By submitting, you agree that you've read our <a href="/privacy">privacy policy</a>.
+        We collect your IP address and approximate location. By submitting, you agree that you've read our <a
+          href="/privacy">privacy policy</a
+        >.
       </p>
     </form>
   </div>
@@ -136,7 +137,11 @@
         with others!
       </p>
     </div>
-    <enhanced:img loading="lazy" src="$lib/images/hackathon.jpg" alt="A hackathon. There are tables arranged in rows and people with laptops sitting at them." />
+    <enhanced:img
+      loading="lazy"
+      src="$lib/images/hackathon.jpg"
+      alt="A hackathon. There are tables arranged in rows and people with laptops sitting at them."
+    />
   </div>
 </article>
 
@@ -194,8 +199,7 @@
       If you'd like to help out, you can
       <a href="https://hcb.hackclub.com/donations/start/zenithhacks">donate to us as an individual</a>
       or get in touch at
-      <a href="mailto:team@zenithhacks.org">team@zenithhacks.org</a>.
-      Thank you!
+      <a href="mailto:team@zenithhacks.org">team@zenithhacks.org</a>. Thank you!
     </p>
   </div>
 </article>
@@ -227,17 +231,17 @@
 
   @keyframes header {
     0% {
-      font-variation-settings: "wght" 300;
+      font-variation-settings: 'wght' 300;
       transform: translateY(-200%);
     }
 
     50% {
-      font-variation-settings: "wght" 400;
+      font-variation-settings: 'wght' 400;
       transform: translateY(0);
     }
 
     100% {
-      font-variation-settings: "wght" 700;
+      font-variation-settings: 'wght' 700;
       transform: translateY(0);
     }
   }
@@ -252,13 +256,13 @@
   h1 .header-element {
     display: inline-block;
     transform: translateY(-200%);
-    font-variation-settings: "wght" 400;
+    font-variation-settings: 'wght' 400;
     animation: header 1s calc(var(--idx) * 0.05s) forwards;
   }
 
   @media (prefers-reduced-motion) {
     h1 .header-element {
-      font-variation-settings: "wght" 700;
+      font-variation-settings: 'wght' 700;
       animation: none;
     }
   }
@@ -462,7 +466,8 @@
     flex: 1 1 0;
   }
 
-  .image-box, .info picture {
+  .image-box,
+  .info picture {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -480,13 +485,15 @@
       flex-direction: row;
     }
 
-    .image-box, .info picture {
+    .image-box,
+    .info picture {
       max-width: 50%;
       aspect-ratio: 2;
       object-fit: cover;
     }
 
-    .image-box, .info img {
+    .image-box,
+    .info img {
       width: 100%;
       height: 100%;
       object-fit: cover;

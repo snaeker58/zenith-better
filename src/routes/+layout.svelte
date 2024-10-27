@@ -71,8 +71,8 @@
     </div>
     <p>
       Hack Zenith 2025 is fiscally sponsored by The Hack Foundation (d.b.a. Hack Club), a 501(c)(3) nonprofit (EIN:
-      81-2908499). Hack Zenith 2025 is not an official Hack Club event. Use of Hack Club branding does not
-      constitute an endorsement, implied or otherwise, of Hack Zenith 2025 by Hack Club.
+      81-2908499). Hack Zenith 2025 is not an official Hack Club event. Use of Hack Club branding does not constitute an
+      endorsement, implied or otherwise, of Hack Zenith 2025 by Hack Club.
     </p>
   </footer>
 </div>
@@ -92,7 +92,7 @@
       url('$lib/fonts/InstrumentSans-asciionly-subset-instanced.woff2') format('woff2');
     font-display: swap;
   }
-  
+
   :global(html) {
     scrollbar-width: thin;
     scrollbar-color: rgba(255, 255, 255, 0.5) rgba(0, 0, 0, 0.5);
@@ -120,7 +120,7 @@
       transition: none;
     }
   }
-  
+
   :global(:root) {
     font-family: 'Zenith Sans ASCII', 'Zenith Sans', system-ui, sans-serif;
     line-height: 1.5;
@@ -255,7 +255,7 @@
     padding: 4em;
     min-width: 100vw;
   }
-  
+
   footer > * {
     margin: auto;
     max-width: 1024px;
