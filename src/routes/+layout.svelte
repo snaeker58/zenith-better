@@ -1,14 +1,18 @@
 <script>
   import LogoLarge from '$lib/LogoLarge.svelte';
+  import SpaceGroteskTitle from '$lib/fonts/SpaceGrotesk-title-subset-instanced.woff2?url';
+  import InstrumentSansASCII from '$lib/fonts/InstrumentSans-asciionly-subset-instanced.woff2?url';
 
   import fontCSS from './FontStylesheet.css?url';
+  /** @type {{children?: import('svelte').Snippet}} */
+  let { children } = $props();
 </script>
 
 <svelte:head>
   <!-- Look mom, no Google Fonts! -->
   <link
     rel="preload"
-    href="/fonts/SpaceGrotesk-title-subset-instanced.woff2"
+    href={SpaceGroteskTitle}
     as="font"
     type="font/woff2"
     fetchpriority="high"
@@ -16,7 +20,7 @@
   />
   <link
     rel="preload"
-    href="/fonts/InstrumentSans-asciionly-subset-instanced.woff2"
+    href={InstrumentSansASCII}
     as="font"
     type="font/woff2"
     fetchpriority="high"
@@ -37,14 +41,14 @@
 </svelte:head>
 
 <div class="main">
-  <slot />
+  {@render children?.()}
   <footer>
     <div class="footer-inner">
       <a href="/" aria-label="Go to the homepage"><LogoLarge></LogoLarge></a>
       <div class="links">
         <p class="title">Zenith Hacks</p>
         <ul>
-          <li><a href="https://hackclub.com/slack/">Join us on the Hack Club Slack</a></li>
+          <li><a href="https://hackclub.com/slack/?event=Zenith%202025">Join us on the Hack Club Slack</a></li>
           <li><a href="https://github.com/zenith-hacks/zenith">View this page's source code</a></li>
           <li><a href="https://hcb.hackclub.com/zenithhacks">Look at our financials</a></li>
         </ul>
@@ -69,8 +73,8 @@
     </div>
     <p>
       Hack Zenith 2025 is fiscally sponsored by The Hack Foundation (d.b.a. Hack Club), a 501(c)(3) nonprofit (EIN:
-      81-2908499). Hack Zenith 2025 is not an official Hack Club event. Use of Hack Club branding does not
-      constitute an endorsement, implied or otherwise, of Hack Zenith 2025 by Hack Club.
+      81-2908499). Hack Zenith 2025 is not an official Hack Club event. Use of Hack Club branding does not constitute an
+      endorsement, implied or otherwise, of Hack Zenith 2025 by Hack Club.
     </p>
   </footer>
 </div>
@@ -78,7 +82,7 @@
 <style>
   @font-face {
     font-family: 'Zenith Title Grotesk';
-    src: url('/fonts/SpaceGrotesk-title-subset-instanced.woff2') format('woff2');
+    src: url('$lib/fonts/SpaceGrotesk-title-subset-instanced.woff2') format('woff2');
     font-display: swap;
     font-feature-settings: 'ss02' 'ss03' 'ss04' 'ss05';
   }
@@ -87,38 +91,38 @@
     font-family: 'Zenith Sans ASCII';
     src:
       local('Instrument Sans'),
-      url('/fonts/InstrumentSans-asciionly-subset-instanced.woff2') format('woff2');
+      url('$lib/fonts/InstrumentSans-asciionly-subset-instanced.woff2') format('woff2');
     font-display: swap;
   }
-  
-  html {
+
+  :global(html) {
     scrollbar-width: thin;
     scrollbar-color: rgba(255, 255, 255, 0.5) rgba(0, 0, 0, 0.5);
   }
 
-  html::-webkit-scrollbar {
+  :global(html::-webkit-scrollbar) {
     width: 0.5rem;
   }
 
-  html::-webkit-scrollbar-track {
+  :global(html::-webkit-scrollbar-track) {
     background: rgba(0, 0, 0, 0.5);
   }
 
-  html::-webkit-scrollbar-thumb {
+  :global(html::-webkit-scrollbar-thumb) {
     background-color: rgba(255, 255, 255, 0.5);
     border-radius: 0.25rem;
   }
 
-  html::-webkit-scrollbar-thumb:hover {
+  :global(html::-webkit-scrollbar-thumb:hover) {
     background-color: rgba(255, 255, 255, 0.7);
   }
 
   @media (prefers-reduced-motion: reduce) {
-    html::-webkit-scrollbar-thumb {
+    :global(html::-webkit-scrollbar-thumb) {
       transition: none;
     }
   }
-  
+
   :global(:root) {
     font-family: 'Zenith Sans ASCII', 'Zenith Sans', system-ui, sans-serif;
     line-height: 1.5;
@@ -253,7 +257,7 @@
     padding: 4em;
     min-width: 100vw;
   }
-  
+
   footer > * {
     margin: auto;
     max-width: 1024px;
@@ -266,7 +270,7 @@
     margin-bottom: 2em;
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 640px) {
     .footer-inner {
       flex-direction: row;
     }

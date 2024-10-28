@@ -6,17 +6,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Use Node.js 20.x
-        uses: actions/setup-node@v4
+      - uses: oven-sh/setup-bun@v2
         with:
-          node-version: 20
-      - name: npm install, build
+          bun-version: latest
+      - name: bun install, build
         run: |
-          npm install
-          npm run build
+          bun install
+          bun run build
       - name: run Lighthouse CI
         run: |
-          npm install -g @lhci/cli@0.14.x
+          bun install -g @lhci/cli@0.14.x
           lhci autorun
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}

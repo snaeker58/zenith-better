@@ -16,11 +16,10 @@
   import Axure from '$lib/logos/Axure.svg';
   import CodeCrafters from '$lib/logos/CodeCrafters.png';
   import InterviewBuddy from '$lib/logos/InterviewBuddy.png';
-  import Eclipse from '$lib/images/eclipse.webp';
-  import Hackathon from '$lib/images/hackathon.jpg';
+  import Mos from '$lib/logos/mos_logo_3.png';
   import { enhance } from '$app/forms';
 
-  let button: HTMLButtonElement;
+  let button: HTMLButtonElement | undefined = $state();
 </script>
 
 <svelte:head>
@@ -33,23 +32,34 @@
   <!-- Header -->
   <Sparkles />
   <div class="zenith-header">
-    <h1>Zenith <span class="date">2025<span></span></span></h1>
+    <h1>
+      <span class="no-break">
+        {#each Array.from('Zenith').entries() as [idx, char]}
+          <span style="--idx: {idx}" class="header-element">{char}</span>
+        {/each}
+      </span>
+      <span class="no-break">
+        {#each Array.from('2025').entries() as [idx, char]}
+          <span style="--idx: {idx + 7}" class="header-element date">{char}</span>
+        {/each}
+      </span>
+    </h1>
     <p class="header-promo">
-      Zenith is a hackathon in San Francisco for teens led by the Hack Club community coming next year. Join us and make
+      Zenith is a hackathon in the UK for teens led by the Hack Club community coming next year. Join us and make
       something awesome!
     </p>
     <form
       class="outer-email-form"
       method="POST"
       action="/?/email"
-      use:enhance={({ _ }) => {
-        button.classList.add('loading');
-        button.setAttribute('disabled', '');
+      use:enhance={() => {
+        button?.classList.add('loading');
+        button?.setAttribute('disabled', '');
         return async ({ update }) => {
           await update();
 
-          button.classList.remove('loading');
-          button.classList.add('loaded');
+          button?.classList.remove('loading');
+          button?.classList.add('loaded');
         };
       }}
     >
@@ -77,8 +87,9 @@
         </button>
       </div>
       <p class="legal">
-        We collect your IP address and approximate location.
-        By submitting, you agree that you've read our <a href="/privacy">privacy policy</a>.
+        We collect your IP address and approximate location. By submitting, you agree that you've read our <a
+          href="/privacy">privacy policy</a
+        >.
       </p>
     </form>
   </div>
@@ -112,7 +123,7 @@
         collaborate with like minded individuals in a supportive, mistake friendly environment.
       </p>
     </div>
-    <img class="image-box" src={Eclipse} alt="Eclipse" />
+    <enhanced:img loading="lazy" src="$lib/images/eclipse.webp" alt="Eclipse" />
   </div>
 </article>
 
@@ -126,7 +137,11 @@
         with others!
       </p>
     </div>
-    <img class="image-box" src={Hackathon} alt="A hackathon. There are tables arranged in rows and people with laptops sitting at them." />
+    <enhanced:img
+      loading="lazy"
+      src="$lib/images/hackathon.jpg"
+      alt="A hackathon. There are tables arranged in rows and people with laptops sitting at them."
+    />
   </div>
 </article>
 
@@ -162,6 +177,7 @@
     <img loading="lazy" src={Axure} alt="Axure logo" />
     <img loading="lazy" src={CodeCrafters} alt="CodeCrafters logo" />
     <img loading="lazy" src={InterviewBuddy} alt="InterviewBuddy logo" />
+    <img loading="lazy" src={Mos} alt="MOS logo" />
     <!-- <img loading="lazy" src={RedBull} alt="RedBull logo" /> -->
   </div>
 
@@ -213,11 +229,48 @@
 
   /* Header styles */
 
+  @keyframes header {
+    0% {
+      font-variation-settings: 'wght' 300;
+      transform: translateY(-200%);
+    }
+
+    50% {
+      font-variation-settings: 'wght' 400;
+      transform: translateY(0);
+    }
+
+    100% {
+      font-variation-settings: 'wght' 700;
+      transform: translateY(0);
+    }
+  }
+
   h1 {
     font-family: 'Zenith Title Grotesk', 'Zenith Grotesk', monospace, system-ui, sans-serif;
     font-size: 4em;
     line-height: 1;
     width: min-content;
+  }
+
+  h1 .header-element {
+    display: inline-block;
+    transform: translateY(-200%);
+    font-variation-settings: 'wght' 400;
+    animation: header 1s calc(var(--idx) * 0.05s) forwards;
+  }
+
+  @media (prefers-reduced-motion) {
+    h1 .header-element {
+      font-variation-settings: 'wght' 700;
+      animation: none;
+    }
+  }
+
+  h1 .no-break {
+    display: inline-block;
+    min-width: max-content;
+    overflow: clip;
   }
 
   .header-promo {
@@ -413,7 +466,8 @@
     flex: 1 1 0;
   }
 
-  .image-box {
+  .image-box,
+  .info picture {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -430,10 +484,18 @@
     .info > div {
       flex-direction: row;
     }
-    
-    .image-box {
+
+    .image-box,
+    .info picture {
       max-width: 50%;
       aspect-ratio: 2;
+      object-fit: cover;
+    }
+
+    .image-box,
+    .info img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
     }
 

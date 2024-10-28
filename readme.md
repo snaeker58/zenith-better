@@ -1,6 +1,6 @@
 # zenith
 
-This repository contains the Zenith beta website: https://beta.zenithhacks.org/
+This repository contains the Zenith beta website: <https://beta.zenithhacks.org/>
 
 ## Contribution process
 
@@ -8,15 +8,13 @@ This repository is not accepting code contributions from people outside Zenith, 
 
 ### I'm a Zenith team member
 
-This repository is Sarah's problem—in general, please talk to me about anything you're going to do before you do it to ensure that the website is held to a high standard.
-
-To report and fix an issue, open an issue or shoot me a Slack message about it and I'll tell you what to do next. If it is really trivial, just open a PR.
+Coordinate with Leo before opening a PR.
 
 ## Get started
 
 ```
-npm run dev -- --open  # opens website in your browser (hot reloads)
-npm run build          # builds the website
+bun run dev -- --open  # opens website in your browser (hot reloads)
+bun run build          # builds the website
 ```
 
 For specific situations:
@@ -28,6 +26,7 @@ make fonts             # generate font subsets
 
 ## Guidelines
 
+- Use [Bun](https://bun.sh) as your package manager.
 - Use meaningful CSS class names. Do not use Tailwind.
 - Avoid using px.
 - Without good reason, do not override the default text size.
